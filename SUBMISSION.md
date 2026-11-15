@@ -76,7 +76,7 @@ GitHub: [FILL IN GitHub repo URL]
 ## Use of Super Intelligence (SI)
 
 ```
-Yes. We used Claude Code (Anthropic) for code scaffolding, documentation drafting, and copy editing throughout the build. All case study selection, scientific framing, narrative writing, and design decisions were made by the team. SI-assisted code contributions are noted in Git commit messages. No SI-generated images appear in the final UI — the team badge was produced manually, and all map and radar imagery comes from NASA and ESA archives.
+Yes. We used Claude Code (Anthropic) for code scaffolding, documentation drafting, and copy editing throughout the build. All case study selection, scientific framing, narrative writing, and design decisions were made by the team. No SI-generated images appear in the final UI — the team badge was produced manually, and all map and radar imagery comes from NASA and ESA archives.
 ```
 
 ---
