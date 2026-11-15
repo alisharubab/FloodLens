@@ -1,19 +1,62 @@
 "use client";
 
+import { useState } from "react";
 import ReactCompareImage from "react-compare-image";
 
-const OPTICAL = "/data/pakistan-floods/optical-context.png";
-const SAR = "/data/pakistan-floods/after.png";
+const DIR = "/data/pakistan-floods";
+const SAR = `${DIR}/sentinel1-vv.jpg`;
+
+// Both Landsat frames and the SAR image share the same 16:10 window, so the swipe aligns.
+const OPTICAL = {
+  flood: {
+    src: `${DIR}/landsat-after.jpg`,
+    chip: "28 Aug · flood",
+    label: "Landsat 9 · 28 Aug",
+    caption: "Landsat 9 OLI · 28 Aug 2022 · SWIR-NIR-red false colour",
+    alt: "Landsat 9 false-colour view of flooded Sindh on 28 August 2022; floodwater is blue, with patches of cloud",
+  },
+  before: {
+    src: `${DIR}/landsat-before.jpg`,
+    chip: "4 Aug · before",
+    label: "Landsat 8 · 4 Aug",
+    caption: "Landsat 8 OLI · 4 Aug 2022 · SWIR-NIR-red false colour",
+    alt: "Landsat 8 false-colour view of the same area on 4 August 2022, before the peak flooding",
+  },
+} as const;
+
+type Key = keyof typeof OPTICAL;
 
 export function SwipeView() {
+  const [key, setKey] = useState<Key>("flood");
+  const optical = OPTICAL[key];
+
   return (
     <figure>
+      <div className="wrap mb-5 flex flex-wrap items-center gap-3">
+        <span className="caption text-paper-ghost">Optical layer</span>
+        {(Object.keys(OPTICAL) as Key[]).map((k) => (
+          <button
+            key={k}
+            type="button"
+            onClick={() => setKey(k)}
+            aria-pressed={key === k}
+            className={`caption cursor-pointer rounded-full border px-4 py-1.5 transition-colors ${
+              key === k
+                ? "border-paper bg-paper text-ink"
+                : "border-paper-dim text-paper hover:border-paper"
+            }`}
+          >
+            {OPTICAL[k].chip}
+          </button>
+        ))}
+      </div>
+
       <div className="sar-frame-y relative mx-auto max-w-[var(--max-w)]">
         <ReactCompareImage
-          leftImage={OPTICAL}
-          leftImageAlt="Optical satellite view of the flooded region, obscured by monsoon cloud"
+          leftImage={optical.src}
+          leftImageAlt={optical.alt}
           rightImage={SAR}
-          rightImageAlt="Sentinel-1 SAR flood extent map where dark pixels show flooded land"
+          rightImageAlt="Sentinel-1 radar backscatter of the same area on 30 August 2022; dark areas are open water"
           sliderLineColor="var(--flood)"
           sliderLineWidth={2}
           sliderPositionPercentage={0.5}
@@ -29,15 +72,24 @@ export function SwipeView() {
         />
         {/* Static corner labels; pointer-events off so dragging is never blocked */}
         <span className="caption pointer-events-none absolute top-4 left-4 bg-ink/80 px-3 py-1.5 text-paper">
-          Optical<span className="hidden sm:inline"> · cloud-blocked</span>
+          <span className="hidden sm:inline">{optical.label}</span>
+          <span className="sm:hidden">Optical</span>
         </span>
         <span className="caption pointer-events-none absolute top-4 right-4 bg-ink/80 px-3 py-1.5 text-flood">
-          SAR<span className="hidden sm:inline"> · flood extent</span>
+          SAR<span className="hidden sm:inline"> · Sentinel-1A · 30 Aug</span>
         </span>
       </div>
+
       <figcaption className="wrap mt-6">
         <p className="caption text-paper-dim">
-          Sentinel-1 · C-band · Sindh Province · August 2022 · Dark = flooded land
+          {optical.caption} · Sentinel-1A · C-band · VV · descending · dark = water
+        </p>
+        <p className="mt-4 max-w-[75ch] text-sm leading-relaxed text-paper-ghost">
+          Sindh Province, Pakistan. Optical and radar scenes were acquired two days apart and
+          resampled into one frame. Landsat data courtesy of the U.S. Geological Survey and NASA
+          Earth Observatory. Sentinel-1 data: contains modified Copernicus Sentinel data 2022,
+          terrain-corrected (RTC) and accessed via Microsoft Planetary Computer, averaged to ~130
+          m pixels and stretched in decibels. Permanent water bodies also read dark.
         </p>
       </figcaption>
     </figure>
