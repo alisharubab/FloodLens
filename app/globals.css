@@ -67,6 +67,7 @@ h3,
 .display {
   font-family: var(--font-display), serif;
   font-feature-settings: "ss01";
+  font-weight: 600;
   letter-spacing: -0.02em;
   line-height: 1.02;
 }
@@ -128,4 +129,372 @@ body::before {
   opacity: 0.06;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
   mix-blend-mode: overlay;
+}
+
+/* ------------------------------------------------------------------
+   Lenis smooth scroll
+------------------------------------------------------------------- */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* ------------------------------------------------------------------
+   Layout: 12-col grid, 24px gutter, 1440 max, 5vw side padding
+------------------------------------------------------------------- */
+.wrap {
+  max-width: var(--max-w);
+  margin-inline: auto;
+  padding-inline: var(--pad-x);
+}
+.grid-12 {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--gutter);
+}
+.section-tight {
+  padding-block: var(--space-tight);
+}
+.section-normal {
+  padding-block: var(--space-normal);
+}
+.section-wide {
+  padding-block: var(--space-wide);
+}
+@media (max-width: 768px) {
+  :root {
+    --space-tight: 3rem;
+    --space-normal: 5rem;
+    --space-wide: 7rem;
+  }
+}
+
+/* Section meta label: "01 · The event" */
+.meta {
+  font-family: var(--font-mono), monospace;
+  font-variant-numeric: tabular-nums;
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--paper-ghost);
+}
+
+/* ------------------------------------------------------------------
+   Narrative: drop cap + pull quote + stat tiles + SAR imagery
+------------------------------------------------------------------- */
+.prose-fl {
+  max-width: 55ch;
+  color: var(--paper);
+}
+.dropcap::first-letter {
+  font-family: var(--font-display), serif;
+  font-weight: 700;
+  color: var(--flood);
+  float: left;
+  font-size: 10.2em; /* ~5 lines deep at 1.65 line-height */
+  line-height: 0.74;
+  padding: 0.03em 0.09em 0 0;
+}
+@media (max-width: 640px) {
+  .dropcap::first-letter {
+    font-size: 6.6em;
+  }
+}
+.pullquote {
+  font-family: var(--font-display), serif;
+  font-style: italic;
+  font-size: clamp(1.5rem, 2.4vw, 2rem);
+  line-height: 1.28;
+  letter-spacing: -0.01em;
+  color: var(--paper);
+  border-left: 2px solid var(--alert);
+  padding-left: 1.5rem;
+}
+.stat {
+  border-top: 0.5px solid var(--paper-ghost);
+  padding-top: 1rem;
+}
+.stat-num {
+  font-family: var(--font-sans), sans-serif;
+  font-weight: 700;
+  font-size: clamp(2.25rem, 4.6vw, 4.5rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.sar-frame,
+.sar-frame-y {
+  border: 0 solid var(--paper-ghost);
+  border-radius: 0; /* scientific imagery stays square */
+}
+.sar-frame {
+  border-width: 0.5px;
+}
+.sar-frame-y {
+  border-block-width: 0.5px;
+}
+
+/* ------------------------------------------------------------------
+   Hero: glow, radar rings, marquee, scroll cue
+------------------------------------------------------------------- */
+.hero-glow {
+  background:
+    radial-gradient(
+      60% 60% at 92% 0%,
+      color-mix(in srgb, var(--alert) 8%, transparent),
+      transparent 72%
+    ),
+    var(--ink);
+}
+.rings {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(120vw, 120vh);
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+.rings span {
+  position: absolute;
+  inset: 0;
+  border: 0.5px solid var(--paper-ghost);
+  border-radius: 50%;
+  opacity: 0;
+  animation: ring-out 12s linear infinite;
+}
+.rings span:nth-child(2) {
+  animation-delay: 4s;
+}
+.rings span:nth-child(3) {
+  animation-delay: 8s;
+}
+@keyframes ring-out {
+  0% {
+    transform: scale(0.12);
+    opacity: 0;
+  }
+  12% {
+    opacity: 0.4;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+.marquee {
+  overflow: hidden;
+  border-top: 0.5px solid var(--paper-ghost);
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 70s linear infinite;
+}
+.marquee-track span {
+  white-space: nowrap;
+  padding-right: 3rem;
+}
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+.scroll-line {
+  position: relative;
+  width: 1px;
+  height: 56px;
+  overflow: hidden;
+  background: linear-gradient(var(--paper-ghost), transparent);
+}
+.scroll-line::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 18px;
+  background: var(--flood);
+  animation: scroll-drip 2.2s ease-in-out infinite;
+}
+@keyframes scroll-drip {
+  from {
+    transform: translateY(-18px);
+  }
+  to {
+    transform: translateY(56px);
+  }
+}
+
+/* ------------------------------------------------------------------
+   Map: custom pin (divIcon), overlay card, Leaflet restyle
+------------------------------------------------------------------- */
+.fl-pin-wrap {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  cursor: pointer;
+}
+.fl-pin-wrap .dot,
+.fl-pin-wrap .ring {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+.fl-pin-wrap .dot {
+  background: var(--flood);
+  box-shadow:
+    0 0 0 3px color-mix(in srgb, var(--flood) 25%, transparent),
+    0 0 18px var(--flood);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+.fl-pin-wrap:hover .dot {
+  transform: scale(1.5);
+  box-shadow:
+    0 0 0 5px color-mix(in srgb, var(--flood) 30%, transparent),
+    0 0 32px var(--flood);
+}
+.fl-pin-wrap .ring {
+  border: 1px solid var(--flood);
+  opacity: 0;
+  animation: pin-ping 3.6s ease-out infinite;
+}
+/* spans in order: sweep, ring, ring, ring, dot -> rings are 2nd–4th */
+.fl-pin-wrap .ring:nth-of-type(3) {
+  animation-delay: 1.2s;
+}
+.fl-pin-wrap .ring:nth-of-type(4) {
+  animation-delay: 2.4s;
+}
+.fl-pin-wrap .sweep {
+  position: absolute;
+  inset: -36px;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    color-mix(in srgb, var(--flood) 42%, transparent),
+    transparent 26%
+  );
+  mask-image: radial-gradient(circle, #000 20%, transparent 68%);
+  animation: sweep 4s linear infinite;
+  pointer-events: none;
+}
+@keyframes pin-ping {
+  0% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(5);
+    opacity: 0;
+  }
+}
+@keyframes sweep {
+  to {
+    transform: rotate(360deg);
+  }
+}
+/* Turn standard OSM tiles into a dark basemap: invert, restore hue, mute. */
+.fl-tiles {
+  filter: invert(1) hue-rotate(180deg) brightness(0.82) contrast(0.95) saturate(0.35);
+}
+.leaflet-container {
+  background: var(--ink);
+  font-family: var(--font-sans), sans-serif;
+}
+.leaflet-container .leaflet-control-attribution {
+  background: color-mix(in srgb, var(--ink) 80%, transparent);
+  color: var(--paper-ghost);
+  font-family: var(--font-mono), monospace;
+  font-size: 10px;
+}
+.leaflet-container .leaflet-control-attribution a {
+  color: var(--paper-dim);
+}
+.leaflet-container .leaflet-bar {
+  border: 0.5px solid var(--paper-ghost);
+  border-radius: 0;
+  box-shadow: none;
+}
+.leaflet-container .leaflet-bar a {
+  background: var(--ink-soft);
+  color: var(--paper);
+  border-bottom: 0.5px solid var(--paper-ghost);
+  border-radius: 0;
+}
+.leaflet-container .leaflet-bar a:hover {
+  background: var(--flood);
+  color: var(--ink);
+}
+
+/* ------------------------------------------------------------------
+   SAR diagram (inline SVG)
+------------------------------------------------------------------- */
+.sar-down,
+.sar-up,
+.sar-bounce {
+  stroke-dasharray: 7 13;
+  animation: dash-flow 1.8s linear infinite;
+}
+.sar-up {
+  animation-delay: 0.9s;
+}
+.sar-bounce {
+  animation-delay: 0.9s;
+}
+@keyframes dash-flow {
+  to {
+    stroke-dashoffset: -20;
+  }
+}
+.sar-cloud {
+  animation: cloud-drift 14s ease-in-out infinite alternate;
+}
+.sar-cloud:nth-of-type(2) {
+  animation-duration: 18s;
+  animation-direction: alternate-reverse;
+}
+@keyframes cloud-drift {
+  from {
+    transform: translateX(-14px);
+  }
+  to {
+    transform: translateX(14px);
+  }
+}
+.svg-label {
+  font-family: var(--font-mono), monospace;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  fill: var(--paper-ghost);
+}
+
+/* Diagram labels are unreadably small below tablet; the columns explain it. */
+@media (max-width: 768px) {
+  .svg-label {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
 }
