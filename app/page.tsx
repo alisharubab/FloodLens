@@ -1,6 +1,8 @@
+import { Brief } from "@/components/Brief";
 import { CaseMapLoader } from "@/components/CaseMapLoader";
 import { Hero } from "@/components/Hero";
 import { Reveal } from "@/components/Reveal";
+import { ResultsBand } from "@/components/ResultsBand";
 import { SarDiagram } from "@/components/SarDiagram";
 import { ScrollProgress } from "@/components/ScrollProgress";
 import { SmoothScroll } from "@/components/SmoothScroll";
@@ -43,25 +45,26 @@ export default function Home() {
       <main>
         <Hero />
 
-        {/* 01 · The event */}
-        <section className="section-normal bg-canvas-soft">
+        {/* 01 · The brief: problem, question, finding */}
+        <Brief />
+
+        {/* 02 · The event */}
+        <section id="event" className="section-normal bg-canvas">
           <div className="wrap">
             <div className="grid-12 items-end gap-y-14">
               <Reveal className="col-span-12 lg:col-span-7">
-                <p className="meta">01 · The event</p>
+                <p className="meta">02 · The event</p>
                 <h2 className="mt-6 max-w-[14ch]">A third of Pakistan went underwater.</h2>
                 <p className="dropcap prose-fl mt-10">
                   Record monsoon rain and melting glaciers swamped Pakistan from June to
                   October 2022. Rivers burst their banks and, by late August, a third of the
-                  country was submerged. Thick cloud sat over the flood zone for weeks, and
-                  optical satellites, which need a clear view of the ground, were largely
-                  blinded.
+                  country was submerged. Understanding where the water had gone, and how far, meant
+                  reading it from space.
                 </p>
               </Reveal>
               <Reveal className="col-span-12 lg:col-span-5" delay={0.15}>
                 <blockquote className="pullquote">
-                  Monsoon clouds blocked every optical satellite. SAR was the only thing that
-                  could see.
+                  The first question after any flood is the simplest one: where is the water?
                 </blockquote>
               </Reveal>
             </div>
@@ -71,12 +74,16 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 02 · Through the clouds */}
-        <section className="section-normal bg-canvas">
+        {/* 03 · The solution: one frame, two sensors */}
+        <section id="solution" className="section-normal bg-canvas-soft">
           <div className="wrap">
             <Reveal>
-              <p className="meta">02 · Through the clouds</p>
-              <h2 className="mt-6 max-w-[16ch]">What optical saw. What SAR saw.</h2>
+              <p className="meta">03 · The solution</p>
+              <h2 className="mt-6 max-w-[16ch]">One frame, two sensors.</h2>
+              <p className="t-lede mt-8 max-w-[50ch] text-fg-dim">
+                Drag to compare. On one side, an image you can read at a glance. On the other,
+                the same ground as seen by radar, where dark means water.
+              </p>
             </Reveal>
           </div>
           <div className="mt-14">
@@ -84,23 +91,26 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 03 · The location */}
-        <section className="bg-canvas-soft pt-[var(--space-normal)]">
+        {/* 04 · What we found */}
+        <ResultsBand />
+
+        {/* 05 · The location */}
+        <section id="location" className="bg-canvas pt-[var(--space-normal)]">
           <div className="wrap pb-14">
             <Reveal>
-              <p className="meta">03 · The location</p>
+              <p className="meta">05 · The location</p>
               <h2 className="mt-6">Where this happened.</h2>
             </Reveal>
           </div>
           <CaseMapLoader />
         </section>
 
-        {/* 04 · The method */}
-        <section className="section-wide bg-canvas">
+        {/* 06 · The method */}
+        <section id="method" className="section-wide bg-canvas-soft">
           <div className="wrap">
             <Reveal>
-              <p className="meta">04 · The method</p>
-              <h2 className="mt-6">Why radar, not cameras.</h2>
+              <p className="meta">06 · The method</p>
+              <h2 className="mt-6">How radar reads water.</h2>
             </Reveal>
             <Reveal className="mt-16" delay={0.1}>
               <SarDiagram />
@@ -123,12 +133,12 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 05 · Ahead */}
-        <section className="section-normal bg-canvas-soft">
+        {/* 07 · Ahead */}
+        <section id="ahead" className="section-normal bg-canvas">
           <div className="wrap">
             <div className="grid-12 gap-y-12">
               <Reveal className="col-span-12 lg:col-span-5">
-                <p className="meta">05 · Ahead</p>
+                <p className="meta">07 · Ahead</p>
                 <h2 className="mt-6">From one flood to every flood.</h2>
               </Reveal>
               <Reveal className="col-span-12 lg:col-span-6 lg:col-start-7" delay={0.12}>
@@ -149,7 +159,7 @@ export default function Home() {
       </main>
 
       {/* END */}
-      <footer className="section-tight bg-canvas">
+      <footer className="section-tight bg-canvas-soft">
         <div className="wrap">
           <p className="meta">End</p>
           <div className="grid-12 mt-10 items-end gap-y-12">

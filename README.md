@@ -2,24 +2,30 @@
 
 > *through clouds · through night*
 
-A radar's-eye view of the floods cameras couldn't see.
+Radar flood data, made readable by anyone.
 
-FloodLens is a web app that shows how NASA SAR (synthetic aperture radar) data mapped the 2022 Pakistan floods through monsoon cloud cover — when every optical satellite was blind. Built for the **2026 NASA Space Apps Challenge**, challenge *Dancing with the SARs*.
+**The problem.** Satellite radar (SAR) can map floodwater across whole provinces, but a raw radar image is grey speckle that only specialists can read, so the people who need the answer rarely get to see it.
+
+**What FloodLens does.** For one real event, the 2022 Pakistan floods, it puts Sentinel-1 radar and Landsat optical imagery of the same ground into a single frame, with plain-language guides. Built for the **2026 NASA Space Apps Challenge**, challenge *Dancing with the SARs*.
 
 Team **Despeckle** · Islamabad Local Event
 
-## What it does
+## What we found
 
-Scroll through a single story of the deadliest flood of the past decade — 33 million people affected, 1,700+ dead — and see what synthetic aperture radar captured when optical satellites couldn't see through the monsoon:
+Over one 22,000 km² scene of Sindh, radar and optical independently agree:
 
-- Before/after SAR imagery with a swipe comparison
-- Interactive map of the flood extent in Sindh province
-- Plain-English explainer of how SAR works and why it matters
-- Stats panel with the human and economic cost of the event
+- Radar alone maps about **9,300 km²** of water; Landsat maps about **9,400 km²**, within 2%
+- The two maps classify the same ground identically on **76%** of pixels (51% would be chance)
+- Landsat water coverage **more than doubled** between 4 and 28 August 2022
 
-## Why it matters
+These are simple threshold classifiers shown for illustration, not an operational flood product. The site states each method and how much the numbers move with the thresholds.
 
-When disasters strike in cloudy or dark conditions, optical satellites fail. SAR is the only reliable way to monitor what's happening on the ground. FloodLens makes radar data legible to anyone — scientists, emergency responders, educators, the public — using the 2022 Pakistan floods as the flagship example.
+## What's on the page
+
+- A three-part brief: the problem, what we set out to find, what we found
+- A swipe comparison of Landsat (before / during the flood) and Sentinel-1 radar, aligned to one frame
+- The results, with method and uncertainty
+- An interactive map of the location and an animated diagram of how radar reads water
 
 Future scope: more flood events in a growing archive, Thwaites Glacier retreat (SAR's other irreplaceable role), live NISAR integration.
 
@@ -27,7 +33,7 @@ Future scope: more flood events in a growing archive, Thwaites Glacier retreat (
 
 - Next.js (App Router) + TypeScript + Tailwind CSS
 - React Leaflet for mapping
-- Pre-processed SAR imagery from NASA's public archives
+- Python (rasterio, NumPy) to read, register and measure the Sentinel-1 scene against the Landsat frame
 - Deployed on Vercel
 
 ## Data

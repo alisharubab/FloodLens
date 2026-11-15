@@ -19,6 +19,10 @@
   --warn: #b07400; /* amber — callouts */
   --signal: #2a9d2f; /* green — radar echoes */
 
+  /* Accents for the dark results band (the deep versions vanish on near-black) */
+  --flood-lit: #5fd4ff;
+  --alert-lit: #ff6b92;
+
   /* Section rhythm — never equal paddings between all sections */
   --space-tight: 4rem;
   --space-normal: 8rem;
@@ -41,6 +45,8 @@
   --color-alert: var(--alert);
   --color-warn: var(--warn);
   --color-signal: var(--signal);
+  --color-flood-lit: var(--flood-lit);
+  --color-alert-lit: var(--alert-lit);
 
   --font-display: var(--font-fraunces);
   --font-sans: var(--font-grotesk);
@@ -233,6 +239,48 @@ html.lenis body {
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
+/* Brief: problem / question / finding */
+.brief-head {
+  font-family: var(--font-display), serif;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.06;
+  font-size: clamp(1.75rem, 2.7vw, 2.5rem);
+}
+.brief-head-xl {
+  font-size: clamp(2.25rem, 4vw, 3.75rem);
+  line-height: 1.02;
+}
+
+/* Results band: inverted (dark) section so the findings can't be skimmed past */
+.meta-lit {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: color-mix(in srgb, var(--canvas) 62%, transparent);
+}
+.rule-lit {
+  border-top: 0.5px solid color-mix(in srgb, var(--canvas) 35%, transparent);
+}
+.result-num {
+  font-family: var(--font-sans), sans-serif;
+  font-weight: 700;
+  line-height: 0.92;
+  letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  font-size: clamp(3.75rem, 8.5vw, 7.5rem);
+}
+.result-num-xl {
+  /* must fit the 6/12 column at lg without touching the next stat */
+  font-size: clamp(4rem, 10.5vw, 9rem);
+}
+.bar-track {
+  height: 14px;
+  background: color-mix(in srgb, var(--canvas) 14%, transparent);
+}
+
 .sar-frame,
 .sar-frame-y {
   border: 0 solid var(--fg-ghost);

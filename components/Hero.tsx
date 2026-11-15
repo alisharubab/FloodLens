@@ -21,7 +21,7 @@ export function Hero() {
           through clouds · through night
         </p>
         <p className="t-lede mt-10 max-w-[34ch] text-fg-dim">
-          A radar&rsquo;s-eye view of the floods cameras couldn&rsquo;t see.
+          Radar flood data, made readable by anyone.
         </p>
       </div>
 

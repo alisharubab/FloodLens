@@ -17,9 +17,11 @@ FloodLens
 ## High-Level Project Summary
 
 ```
-FloodLens is a web app that shows how synthetic aperture radar (SAR) satellites map flood disasters through clouds and darkness — when every optical satellite is blind. Using Sentinel-1 radar data alongside NASA Landsat imagery, it turns radar observations into a visual story anyone can read.
+The problem: satellite radar (SAR) can map floodwater across whole provinces, but a raw radar image is grey speckle that only specialists can read, so the people who need the answer rarely get to see it.
 
-The flagship case is the 2022 Pakistan floods — the deadliest flood event of the past decade, where monsoon cloud cover blocked every passive sensor but Sentinel-1 SAR mapped around 75,000 km² of inundation in near-real-time. FloodLens shows what SAR saw when nothing else could, side-by-side with the optical view, and explains why radar remote sensing matters most when the stakes are highest.
+FloodLens is a web app that makes radar flood data readable by anyone. For one real event, the 2022 Pakistan floods, it puts Sentinel-1 radar and Landsat optical imagery of the same ground into a single frame, with plain-language guides and a how-it-works diagram.
+
+What we found: measured over one 22,000 km² scene of Sindh, radar and optical independently agree. Radar alone maps about 9,300 km² of water; Landsat maps about 9,400 km², within 2% of each other, and the two classify the same ground identically on 76% of pixels (51% would be chance).
 ```
 
 ---
@@ -46,25 +48,28 @@ Also add your GitHub repo URL inside the Detailed Description below.
 
 ```
 What exactly does it do?
-FloodLens is a single-page web application that lets anyone see what SAR (synthetic aperture radar) satellites captured during the 2022 Pakistan floods — the deadliest flood event of the past decade, where 33 million people were affected and 1,700+ died under monsoon cloud cover that blinded every optical satellite. Visitors scroll through the story, compare optical vs SAR imagery with a swipe view, see where the event occurred on an interactive map, and read a short explainer on how SAR works.
+FloodLens is a single-page web application that makes radar flood data legible to non-specialists. The problem: SAR satellites can map floodwater at scale, but raw radar imagery looks like noise to most people. Our solution: for the 2022 Pakistan floods (33 million people affected, 1,700+ deaths), we place real Sentinel-1 radar and Landsat optical imagery of the same ground in one aligned frame. Visitors read a three-part brief (problem, question, finding), drag a swipe control to compare the two views, switch the optical layer between before and during the flood, see the results, find the location on an interactive map, and learn how radar reads water from an animated diagram.
+
+What did we set out to find, and what did we find?
+We asked: can a radar flood map be read at a glance, and does it hold up against what the eye can see? Over one 188 × 118 km window of Sindh (22,124 km²), radar and optical agree. Radar alone maps about 9,300 km² of water and Landsat about 9,400 km² (within 2%). The two maps classify the same ground identically on 76% of pixels, against 51% expected by chance. Landsat shows water coverage more than doubling between 4 and 28 August (at least 2.4x under every setting we tried). These are simple threshold classifiers shown for illustration, not an operational flood product, and the page states the method and the sensitivity of each number.
 
 How does it work?
-SAR satellites send out microwave pulses and record what reflects back. Because microwaves penetrate clouds and don't depend on sunlight, SAR works day or night, clear or stormy — the only reliable way to monitor disasters as they unfold. For the Pakistan floods case, we used NASA Earth Observatory Landsat 8 and 9 imagery (4 and 28 August 2022) and a Sentinel-1A radar scene from 30 August 2022 (terrain-corrected, VV polarization, accessed through Microsoft Planetary Computer). We registered the radar scene to the Landsat frame and averaged it to about 130 m pixels. Flooded water appears dark in SAR imagery because smooth water surfaces reflect microwaves away from the satellite. We display the optical and radar views with an interactive swipe control, with a toggle between the before-flood and flood-time optical scenes, so users can see exactly what changed during the event.
+SAR satellites send microwave pulses and record what reflects back. Smooth water reflects the pulse away from the satellite, so flooded ground appears dark. We used NASA Earth Observatory Landsat 8 and 9 imagery (4 and 28 August 2022) and a Sentinel-1A radar scene from 30 August 2022 (terrain-corrected, VV polarization, accessed through Microsoft Planetary Computer). The Landsat images are tilted about 12 degrees relative to north, so we solved the rotation and offset by correlating water masks and checked the overlay by eye, then resampled the radar scene into the Landsat frame at about 130 m. Radar water is backscatter below -13 dB (a threshold chosen from the data with Otsu's method, not tuned); optical water is low-SWIR non-vegetation pixels in the false-colour composite.
 
 What benefits does it have?
-- Emergency responders see flood extent during the exact hours cloud cover would hide it
-- Journalists, educators, and the public understand why SAR matters, with a case that makes the stakes concrete
-- Open-source, so any region can be added as another case study
-- Framed for a non-specialist audience — no GIS knowledge required
+- Makes radar flood data understandable to journalists, educators, students and planners with no GIS background
+- Shows, with a measurable case, that radar and optical flood maps agree
+- Open source and extensible: another region or event is another case study
+- Every figure on the page comes with its method and its uncertainty
 
 What do you hope to achieve?
-To make radar data as legible as a weather map. If someone opens FloodLens and understands why SAR matters within 30 seconds, we have succeeded. Longer term: an archive of every major flood event, Thwaites Glacier retreat (SAR's other irreplaceable role, through Antarctic polar night), live NISAR integration as the mission's data archive grows, alert thresholds for disaster responders, and regional partner onboarding.
+To make radar flood maps as legible as a weather map. Longer term: an archive of every major flood event, Thwaites Glacier retreat (SAR's other irreplaceable role, through Antarctic polar night), live NISAR integration as the mission's data archive grows, and onboarding for regional agencies to add their own areas of interest.
 
 What tools, coding languages, hardware, or software did you use?
 - Frontend: Next.js (App Router), TypeScript, Tailwind CSS, React Leaflet, react-compare-image, Framer Motion, Lenis
 - Deployment: Vercel
-- Mapping: Leaflet.js with OpenStreetMap tiles (darkened with CSS)
-- Image processing: Python (rasterio, NumPy, SciPy, Pillow) to read, register and crop the Sentinel-1 scene to the Landsat frame
+- Mapping: Leaflet.js with OpenStreetMap tiles (muted with CSS)
+- Image processing and analysis: Python (rasterio, NumPy, SciPy, Pillow) to read, register, crop and measure the Sentinel-1 scene against the Landsat frame
 - Data sources: NASA Earth Observatory Landsat 8/9 imagery (USGS/NASA), Sentinel-1A RTC radar data (ESA/Copernicus) via Microsoft Planetary Computer
 - AI assistance: Claude Code (Anthropic) — see SI declaration below
 
@@ -107,7 +112,7 @@ Other references:
 
 ## 7-Slide Deck Outline
 
-Dark template in Google Slides. Max 15 words per slide. Screenshots from the deployed FloodLens site for slides 4, 5, 6.
+Light template in Google Slides. Max 15 words per slide. Screenshots from the deployed FloodLens site for slides 2 to 6.
 
 ### Slide 1 — Title
 - **FloodLens**
@@ -116,36 +121,36 @@ Dark template in Google Slides. Max 15 words per slide. Screenshots from the dep
 - 2026 NASA Space Apps Challenge · Dancing with the SARs · Islamabad
 
 ### Slide 2 — The problem
-- Headline: "When floods strike, optical satellites go blind."
-- Visual: a MODIS optical image fully covered by monsoon cloud over Pakistan, August 2022
-- Caption: "33 million people needed to be found under those clouds."
+- Headline: "Flood radar is powerful, and unreadable."
+- Visual: the raw grey Sentinel-1 image, uncaptioned (the 'brief' section also works)
+- Caption: "Only specialists can read it, so most people never see it."
 
-### Slide 3 — Why SAR
-- Headline: "Radar sees through clouds and darkness."
-- Visual: simple diagram — arrows of SAR pulses punching through a cloud layer to a flooded field
-- Caption: "Microwave pulses reflect off the ground regardless of weather or daylight."
+### Slide 3 — What we set out to find
+- Headline: "Can a radar flood map be read at a glance?"
+- Visual: screenshot of the swipe, mid-drag, optical on one side and radar on the other
+- Caption: "One real event: the 2022 Pakistan floods, one frame, two sensors."
 
 ### Slide 4 — What we built
-- Headline: "FloodLens — a radar's-eye view of a disaster."
-- Visual: full-page screenshot of the deployed FloodLens hero section
-- Caption: "A one-scroll story of what SAR saw when nothing else could."
+- Headline: "FloodLens: radar flood data, made readable."
+- Visual: screenshot of the hero plus the three-part brief
+- Caption: "A one-scroll guide: problem, comparison, results, method."
 
-### Slide 5 — The imagery
-- Headline: "What optical saw. What SAR saw."
-- Visual: the before/after swipe screenshot from the site, side-by-side
-- Caption: "Sentinel-1 SAR mapped ~75,000 km² of flood in near-real-time."
+### Slide 5 — What we found
+- Headline: "Radar and optical agree."
+- Visual: screenshot of the dark results band (9,300 km², 76%, 2x+, and the three bars)
+- Caption: "Two independent sensors, same answer: within 2%, 76% pixel match."
 
-### Slide 6 — Why it matters
-- Headline: "33M affected. $40B damage. 1,739 dead."
-- Visual: screenshot of the stats panel from the site
-- Caption: "The deadliest flood of the past decade — monitored because SAR could."
+### Slide 6 — How it works
+- Headline: "Smooth water reflects radar away, so floods read dark."
+- Visual: screenshot of the animated SAR diagram
+- Caption: "Pulses, echoes, and why flooded ground goes black."
 
 ### Slide 7 — What's next
-- Headline: "From one flood to every flood — and beyond."
+- Headline: "From one flood to every flood."
 - Three bullets:
   - A growing archive of every major flood event
   - Thwaites Glacier retreat (SAR's other irreplaceable role, through Antarctic polar night)
-  - Live NISAR integration as the mission archive grows
+  - Open onboarding so regional agencies add their own areas
 
 ---
 

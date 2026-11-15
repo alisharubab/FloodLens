@@ -19,7 +19,7 @@ const STATS: Stat[] = [
   { label: "Economic damage · est.", value: 40, prefix: "$", suffix: "B", tone: "flood" },
 ];
 
-function Counter({ value, prefix = "", suffix = "" }: Pick<Stat, "value" | "prefix" | "suffix">) {
+export function Counter({ value, prefix = "", suffix = "" }: Pick<Stat, "value" | "prefix" | "suffix">) {
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, margin: "0px 0px -15% 0px" });
   const reduce = useReducedMotion();
