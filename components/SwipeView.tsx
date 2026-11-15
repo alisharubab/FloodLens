@@ -33,7 +33,7 @@ export function SwipeView() {
   return (
     <figure>
       <div className="wrap mb-5 flex flex-wrap items-center gap-3">
-        <span className="caption text-paper-ghost">Optical layer</span>
+        <span className="caption text-fg-ghost">Optical layer</span>
         {(Object.keys(OPTICAL) as Key[]).map((k) => (
           <button
             key={k}
@@ -42,8 +42,8 @@ export function SwipeView() {
             aria-pressed={key === k}
             className={`caption cursor-pointer rounded-full border px-4 py-1.5 transition-colors ${
               key === k
-                ? "border-paper bg-paper text-ink"
-                : "border-paper-dim text-paper hover:border-paper"
+                ? "border-fg bg-fg text-canvas"
+                : "border-fg-dim text-fg hover:border-fg"
             }`}
           >
             {OPTICAL[k].chip}
@@ -60,10 +60,10 @@ export function SwipeView() {
           sliderLineColor="var(--flood)"
           sliderLineWidth={2}
           sliderPositionPercentage={0.5}
-          skeleton={<div className="h-full w-full bg-ink-soft" />}
+          skeleton={<div className="h-full w-full bg-canvas-soft" />}
           handle={
             <div
-              className="mono flex h-14 w-14 items-center justify-center rounded-full border border-flood bg-ink text-sm whitespace-nowrap text-flood"
+              className="mono flex h-14 w-14 items-center justify-center rounded-full border border-flood bg-canvas text-sm whitespace-nowrap text-flood"
               aria-hidden
             >
               ← →
@@ -71,20 +71,20 @@ export function SwipeView() {
           }
         />
         {/* Static corner labels; pointer-events off so dragging is never blocked */}
-        <span className="caption pointer-events-none absolute top-4 left-4 bg-ink/80 px-3 py-1.5 text-paper">
+        <span className="caption pointer-events-none absolute top-4 left-4 bg-canvas/80 px-3 py-1.5 text-fg">
           <span className="hidden sm:inline">{optical.label}</span>
           <span className="sm:hidden">Optical</span>
         </span>
-        <span className="caption pointer-events-none absolute top-4 right-4 bg-ink/80 px-3 py-1.5 text-flood">
+        <span className="caption pointer-events-none absolute top-4 right-4 bg-canvas/80 px-3 py-1.5 text-flood">
           SAR<span className="hidden sm:inline"> · Sentinel-1A · 30 Aug</span>
         </span>
       </div>
 
       <figcaption className="wrap mt-6">
-        <p className="caption text-paper-dim">
+        <p className="caption text-fg-dim">
           {optical.caption} · Sentinel-1A · C-band · VV · descending · dark = water
         </p>
-        <p className="mt-4 max-w-[75ch] text-sm leading-relaxed text-paper-ghost">
+        <p className="mt-4 max-w-[75ch] text-sm leading-relaxed text-fg-ghost">
           Sindh Province, Pakistan. Optical and radar scenes were acquired two days apart and
           resampled into one frame. Landsat data courtesy of the U.S. Geological Survey and NASA
           Earth Observatory. Sentinel-1 data: contains modified Copernicus Sentinel data 2022,

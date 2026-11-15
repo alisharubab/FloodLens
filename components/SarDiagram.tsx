@@ -19,15 +19,15 @@ export function SarDiagram() {
     >
       {/* ground */}
       <rect x="640" y="350" width="500" height="50" fill="var(--flood)" fillOpacity="0.1" />
-      <polyline points={LAND} fill="none" stroke="var(--paper-dim)" strokeWidth="1.25" />
+      <polyline points={LAND} fill="none" stroke="var(--fg-dim)" strokeWidth="1.25" />
       <line x1="640" y1="350" x2="1140" y2="350" stroke="var(--flood)" strokeWidth="2" />
 
       {/* clouds: drawn before the beams so the pulses visibly pass through */}
       <g className="sar-cloud">
-        <path d={CLOUD} transform="translate(330 140)" fill="var(--ink-soft)" stroke="var(--paper-ghost)" strokeWidth="0.75" />
+        <path d={CLOUD} transform="translate(330 140)" fill="var(--canvas-soft)" stroke="var(--fg-ghost)" strokeWidth="0.75" />
       </g>
       <g className="sar-cloud">
-        <path d={CLOUD} transform="translate(640 128) scale(1.1)" fill="var(--ink-soft)" stroke="var(--paper-ghost)" strokeWidth="0.75" />
+        <path d={CLOUD} transform="translate(640 128) scale(1.1)" fill="var(--canvas-soft)" stroke="var(--fg-ghost)" strokeWidth="0.75" />
       </g>
 
       {/* beam to land, echo back to satellite */}
@@ -39,9 +39,9 @@ export function SarDiagram() {
       <line className="sar-bounce" x1="870" y1="350" x2="1140" y2="50" stroke="var(--alert)" strokeWidth="2" />
 
       {/* satellite */}
-      <rect x="588" y="24" width="24" height="24" fill="var(--paper)" />
-      <rect x="540" y="30" width="42" height="12" fill="none" stroke="var(--paper-dim)" strokeWidth="1" />
-      <rect x="618" y="30" width="42" height="12" fill="none" stroke="var(--paper-dim)" strokeWidth="1" />
+      <rect x="588" y="24" width="24" height="24" fill="var(--fg)" />
+      <rect x="540" y="30" width="42" height="12" fill="none" stroke="var(--fg-dim)" strokeWidth="1" />
+      <rect x="618" y="30" width="42" height="12" fill="none" stroke="var(--fg-dim)" strokeWidth="1" />
 
       {/* labels */}
       <text className="svg-label" x="676" y="40">Satellite · C-band pulse</text>

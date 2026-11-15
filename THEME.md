@@ -4,6 +4,13 @@ This file is the design brain for FloodLens. Read it alongside CLAUDE.md. Every 
 
 **Prime directive**: nothing in this build should look like it came from a Vercel template. Craft over polish. Specific over generic.
 
+> **Update — light theme.** The site ships as a light, warm-paper design. Everything below that
+> describes a dark canvas is superseded by the palette in "Color palette": tokens are now
+> `--canvas` / `--canvas-soft` (backgrounds), `--fg` / `--fg-dim` / `--fg-ghost` (text) and the
+> accents `--flood` `--alert` `--warn` `--signal`, deepened for contrast on cream. Typography,
+> layout, interaction and component rules are unchanged. Where this doc says `--ink` read
+> `--canvas`, and where it says `--paper` read `--fg`.
+
 ---
 
 ## The "this doesn't look AI" test
@@ -105,19 +112,19 @@ Named semantic colors. Not Tailwind indigo-500.
 
 ### Base canvas
 ```
---ink: #0a0616          /* near-black with purple undertone, primary bg */
---ink-soft: #140a2b     /* secondary section bg */
---paper: #fff8ed        /* warm cream, main text and foreground */
---paper-dim: #c7bfd4    /* muted paper for secondary text */
---paper-ghost: #7a6f94  /* hints, metadata, deep muted */
+--canvas: #fbf6ec       /* warm cream, primary bg (never pure white) */
+--canvas-soft: #f0e8d6  /* secondary section bg */
+--fg: #1a1030           /* near-black with purple undertone, main text */
+--fg-dim: #4a4060       /* secondary text */
+--fg-ghost: #6b6086     /* hints, metadata, deep muted */
 ```
 
 ### Accent (use SPARINGLY — these punch)
 ```
---flood: #00d4ff        /* electric cyan — the "water seen by SAR" color */
---alert: #ff2e63        /* hot magenta — stat emphasis, destructive */
---warn: #ffb400         /* amber — callouts, highlights */
---signal: #77ff6a       /* lime — "signal detected", radar echoes */
+--flood: #00729a        /* deep cerulean — the "water seen by SAR" color */
+--alert: #d10f47        /* hot magenta — stat emphasis, destructive */
+--warn: #b07400         /* amber — callouts, highlights */
+--signal: #2a9d2f       /* green — "signal detected", radar echoes */
 ```
 
 ### Rules

@@ -37,7 +37,7 @@ export default function CaseMap() {
         className="h-full w-full"
       >
         {/* CARTO Dark Matter now demands an API key (tiles come back watermarked),
-            so use keyless OSM tiles and darken them with CSS (.fl-tiles). */}
+            so use keyless OSM tiles, muted and warmed with CSS (.fl-tiles). */}
         <TileLayer
           className="fl-tiles"
           url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -52,7 +52,7 @@ export default function CaseMap() {
         />
       </MapContainer>
 
-      <p className="caption pointer-events-none absolute top-4 right-4 z-[1000] bg-ink/80 px-3 py-1.5 text-paper-dim">
+      <p className="caption pointer-events-none absolute top-4 right-4 z-[1000] bg-canvas/80 px-3 py-1.5 text-fg-dim">
         27.5°N · 68.5°E
       </p>
 
@@ -60,23 +60,23 @@ export default function CaseMap() {
         <div
           role="dialog"
           aria-label="Case study"
-          className="absolute bottom-6 left-4 z-[1000] w-[min(22rem,calc(100%-2rem))] border-t border-flood bg-ink p-5 md:left-8"
+          className="absolute bottom-6 left-4 z-[1000] w-[min(22rem,calc(100%-2rem))] border-t border-flood bg-canvas p-5 md:left-8"
         >
-          <p className="caption text-paper-ghost">Case 01 · Sindh Province</p>
+          <p className="caption text-fg-ghost">Case 01 · Sindh Province</p>
           <h3 className="mt-3 text-3xl font-semibold">2022 Pakistan floods</h3>
-          <p className="mt-3 text-paper-dim">
+          <p className="mt-3 text-fg-dim">
             About 75,000 km² under water at peak. Scroll up to explore.
           </p>
           <button
             type="button"
             onClick={() => setOpen(false)}
-            className="caption mt-4 cursor-pointer text-flood hover:text-paper"
+            className="caption mt-4 cursor-pointer text-flood hover:text-fg"
           >
             Close ×
           </button>
         </div>
       ) : (
-        <p className="caption pointer-events-none absolute bottom-4 left-4 z-[1000] bg-ink/80 px-3 py-1.5 text-paper-ghost md:left-8">
+        <p className="caption pointer-events-none absolute bottom-4 left-4 z-[1000] bg-canvas/80 px-3 py-1.5 text-fg-ghost md:left-8">
           Click the pin
         </p>
       )}

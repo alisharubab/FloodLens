@@ -17,28 +17,28 @@ export function Hero() {
         >
           FloodLens
         </h1>
-        <p className="font-display mt-6 text-[clamp(1.5rem,3.4vw,2.75rem)] leading-tight tracking-[-0.02em] text-paper italic">
+        <p className="font-display mt-6 text-[clamp(1.5rem,3.4vw,2.75rem)] leading-tight tracking-[-0.02em] text-fg italic">
           through clouds · through night
         </p>
-        <p className="t-lede mt-10 max-w-[34ch] text-paper-dim">
+        <p className="t-lede mt-10 max-w-[34ch] text-fg-dim">
           A radar&rsquo;s-eye view of the floods cameras couldn&rsquo;t see.
         </p>
       </div>
 
       <div className="wrap relative flex flex-col items-center gap-8 pb-8 md:grid md:grid-cols-3 md:items-end md:gap-6">
-        <p className="caption text-center text-paper-ghost md:text-left">
+        <p className="caption text-center text-fg-ghost md:text-left">
           02 · Pakistan floods · August 2022 · Sentinel-1 SAR
         </p>
         <div className="flex flex-col items-center gap-3">
-          <span className="caption text-paper-dim">Scroll</span>
+          <span className="caption text-fg-dim">Scroll</span>
           <span className="scroll-line" aria-hidden />
         </div>
-        <p className="caption hidden text-right text-paper-ghost md:block">
+        <p className="caption hidden text-right text-fg-ghost md:block">
           27.5°N · 68.5°E
         </p>
       </div>
 
-      <div className="marquee caption relative py-3 text-paper-ghost" aria-hidden>
+      <div className="marquee caption relative py-3 text-fg-ghost" aria-hidden>
         <div className="marquee-track">
           <span>{MARQUEE.repeat(3)}</span>
           <span>{MARQUEE.repeat(3)}</span>

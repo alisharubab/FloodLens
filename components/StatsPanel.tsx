@@ -56,14 +56,14 @@ export function StatsPanel() {
       <div className="grid grid-cols-2 gap-x-6 gap-y-12 lg:grid-cols-4">
         {STATS.map((s) => (
           <div key={s.label} className="stat">
-            <p className="caption text-paper-dim">{s.label}</p>
+            <p className="caption text-fg-dim">{s.label}</p>
             <p className={`stat-num mt-5 ${s.tone === "alert" ? "text-alert" : "text-flood"}`}>
               <Counter value={s.value} prefix={s.prefix} suffix={s.suffix} />
             </p>
           </div>
         ))}
       </div>
-      <p className="caption mt-10 text-paper-ghost">
+      <p className="caption mt-10 text-fg-ghost">
         Figures approximate · 2022 official and UN estimates
       </p>
     </div>

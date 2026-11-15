@@ -44,7 +44,7 @@ export default function Home() {
         <Hero />
 
         {/* 01 · The event */}
-        <section className="section-normal bg-ink-soft">
+        <section className="section-normal bg-canvas-soft">
           <div className="wrap">
             <div className="grid-12 items-end gap-y-14">
               <Reveal className="col-span-12 lg:col-span-7">
@@ -72,7 +72,7 @@ export default function Home() {
         </section>
 
         {/* 02 · Through the clouds */}
-        <section className="section-normal bg-ink">
+        <section className="section-normal bg-canvas">
           <div className="wrap">
             <Reveal>
               <p className="meta">02 · Through the clouds</p>
@@ -85,7 +85,7 @@ export default function Home() {
         </section>
 
         {/* 03 · The location */}
-        <section className="bg-ink-soft pt-[var(--space-normal)]">
+        <section className="bg-canvas-soft pt-[var(--space-normal)]">
           <div className="wrap pb-14">
             <Reveal>
               <p className="meta">03 · The location</p>
@@ -96,7 +96,7 @@ export default function Home() {
         </section>
 
         {/* 04 · The method */}
-        <section className="section-wide bg-ink">
+        <section className="section-wide bg-canvas">
           <div className="wrap">
             <Reveal>
               <p className="meta">04 · The method</p>
@@ -109,13 +109,13 @@ export default function Home() {
               {METHOD.map((m, i) => (
                 <Reveal key={m.n} className={`col-span-12 ${m.span}`} delay={i * 0.12}>
                   <div className="stat">
-                    <p className="display text-[clamp(4rem,9vw,8rem)] leading-none text-paper-ghost">
+                    <p className="display text-[clamp(4rem,9vw,8rem)] leading-none text-fg-ghost">
                       {m.n}
                     </p>
                     <h3 className="mt-6 font-sans text-xl font-medium tracking-normal">
                       {m.title}
                     </h3>
-                    <p className="mt-3 max-w-[36ch] text-paper-dim">{m.body}</p>
+                    <p className="mt-3 max-w-[36ch] text-fg-dim">{m.body}</p>
                   </div>
                 </Reveal>
               ))}
@@ -124,7 +124,7 @@ export default function Home() {
         </section>
 
         {/* 05 · Ahead */}
-        <section className="section-normal bg-ink-soft">
+        <section className="section-normal bg-canvas-soft">
           <div className="wrap">
             <div className="grid-12 gap-y-12">
               <Reveal className="col-span-12 lg:col-span-5">
@@ -134,7 +134,7 @@ export default function Home() {
               <Reveal className="col-span-12 lg:col-span-6 lg:col-start-7" delay={0.12}>
                 <ul>
                   {AHEAD.map((item) => (
-                    <li key={item} className="stat flex gap-4 pb-8 text-paper-dim">
+                    <li key={item} className="stat flex gap-4 pb-8 text-fg-dim">
                       <span className="mono text-flood" aria-hidden>
                         →
                       </span>
@@ -149,31 +149,31 @@ export default function Home() {
       </main>
 
       {/* END */}
-      <footer className="section-tight bg-ink">
+      <footer className="section-tight bg-canvas">
         <div className="wrap">
           <p className="meta">End</p>
           <div className="grid-12 mt-10 items-end gap-y-12">
-            <p className="font-display col-span-12 text-[clamp(2rem,5vw,3.5rem)] leading-tight tracking-[-0.02em] text-paper italic lg:col-span-6">
+            <p className="font-display col-span-12 text-[clamp(2rem,5vw,3.5rem)] leading-tight tracking-[-0.02em] text-fg italic lg:col-span-6">
               through clouds · through night
             </p>
-            <dl className="caption col-span-12 grid gap-y-4 text-paper-dim lg:col-span-6">
+            <dl className="caption col-span-12 grid gap-y-4 text-fg-dim lg:col-span-6">
               <div>
-                <dt className="text-paper-ghost">Team</dt>
+                <dt className="text-fg-ghost">Team</dt>
                 <dd>Despeckle</dd>
               </div>
               <div>
-                <dt className="text-paper-ghost">Challenge</dt>
+                <dt className="text-fg-ghost">Challenge</dt>
                 <dd>Dancing with the SARs · 2026 NASA Space Apps</dd>
               </div>
               <div>
-                <dt className="text-paper-ghost">Data</dt>
+                <dt className="text-fg-ghost">Data</dt>
                 <dd>
                   NASA Earth Observatory · Landsat 8/9 (USGS) · Sentinel-1 (ESA Copernicus)
                   via Planetary Computer
                 </dd>
               </div>
               <div>
-                <dt className="text-paper-ghost">Source</dt>
+                <dt className="text-fg-ghost">Source</dt>
                 <dd>
                   <a
                     href={GITHUB_URL}
