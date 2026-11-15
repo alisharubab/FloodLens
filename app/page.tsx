@@ -167,7 +167,10 @@ export default function Home() {
               </div>
               <div>
                 <dt className="text-paper-ghost">Data</dt>
-                <dd>NASA Disasters Program · Sentinel-1 via ASF · NASA Earth Observatory</dd>
+                <dd>
+                  NASA Earth Observatory · Landsat 8/9 (USGS) · Sentinel-1 (ESA Copernicus)
+                  via Planetary Computer
+                </dd>
               </div>
               <div>
                 <dt className="text-paper-ghost">Source</dt>

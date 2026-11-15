@@ -10,7 +10,7 @@ Team **Despeckle** · Islamabad Local Event
 
 ## What it does
 
-Scroll through a single story of the deadliest flood of the past decade — 33 million people displaced, 1,700+ dead — and see what synthetic aperture radar captured when optical satellites couldn't see through the monsoon:
+Scroll through a single story of the deadliest flood of the past decade — 33 million people affected, 1,700+ dead — and see what synthetic aperture radar captured when optical satellites couldn't see through the monsoon:
 
 - Before/after SAR imagery with a swipe comparison
 - Interactive map of the flood extent in Sindh province
@@ -25,14 +25,14 @@ Future scope: more flood events in a growing archive, Thwaites Glacier retreat (
 
 ## Tech
 
-- Next.js 14 + TypeScript + Tailwind CSS
+- Next.js (App Router) + TypeScript + Tailwind CSS
 - React Leaflet for mapping
 - Pre-processed SAR imagery from NASA's public archives
 - Deployed on Vercel
 
 ## Data
 
-All imagery is NASA-sourced or NASA-archived (ESA Sentinel-1 via Alaska Satellite Facility). See SUBMISSION.md for the full source list.
+Imagery: NASA Earth Observatory Landsat 8/9 (USGS) and ESA Sentinel-1A (via Microsoft Planetary Computer). See SUBMISSION.md for the full source list.
 
 ## Running locally
 
