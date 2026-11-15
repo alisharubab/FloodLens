@@ -7,7 +7,7 @@ import { SmoothScroll } from "@/components/SmoothScroll";
 import { StatsPanel } from "@/components/StatsPanel";
 import { SwipeView } from "@/components/SwipeView";
 
-const GITHUB_URL = "https://github.com/alisharubab/floodlens";
+const GITHUB_URL = "https://github.com/alisharubab/FloodLens";
 
 const METHOD = [
   {
